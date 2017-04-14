@@ -229,8 +229,8 @@ smul scalar (Number value unit) =
     sub
 
 
-(.*) : Number a -> Number b -> Number (Mul a b)
-(.*) =
+(.**) : Number a -> Number b -> Number (Mul a b)
+(.**) =
     mul
 
 
@@ -239,8 +239,8 @@ smul scalar (Number value unit) =
     div
 
 
-(.!) : Float -> Number unit -> Number unit
-(.!) =
+(.*) : Float -> Number unit -> Number unit
+(.*) =
     smul
 
 
@@ -255,4 +255,4 @@ speed =
 
 energy : Number Joule
 energy =
-    milli newton 10 .* meter 4
+    milli newton 10 .** meter 4
