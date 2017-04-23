@@ -2,7 +2,7 @@ module Metric exposing (..)
 
 
 type Number unit
-    = Number Float unit
+    = Number Float
 
 
 
@@ -10,11 +10,11 @@ type Number unit
 
 
 type Mul a b
-    = Mul a b
+    = Mul
 
 
 type Div a b
-    = Div a b
+    = Div
 
 
 
@@ -51,7 +51,7 @@ type alias Constructor unit =
 
 number : unit -> Constructor unit
 number unit value =
-    Number value unit
+    Number value
 
 
 type alias Prefix unit =
@@ -191,28 +191,28 @@ yotta =
 
 
 add : Number a -> Number a -> Number a
-add (Number valueA unit) (Number valueB _) =
-    Number (valueA + valueB) unit
+add (Number valueA) (Number valueB) =
+    Number (valueA + valueB)
 
 
 sub : Number a -> Number a -> Number a
-sub (Number valueA unit) (Number valueB _) =
-    Number (valueA - valueB) unit
+sub (Number valueA) (Number valueB) =
+    Number (valueA - valueB)
 
 
 mul : Number a -> Number b -> Number (Mul a b)
-mul (Number valueA unitA) (Number valueB unitB) =
-    Number (valueA * valueB) (Mul unitA unitB)
+mul (Number valueA) (Number valueB) =
+    Number (valueA * valueB)
 
 
 div : Number a -> Number b -> Number (Div a b)
-div (Number valueA unitA) (Number valueB unitB) =
-    Number (valueA / valueB) (Div unitA unitB)
+div (Number valueA) (Number valueB) =
+    Number (valueA / valueB)
 
 
 smul : Float -> Number unit -> Number unit
-smul scalar (Number value unit) =
-    Number (scalar * value) unit
+smul scalar (Number value) =
+    Number (scalar * value)
 
 
 
@@ -253,6 +253,18 @@ speed =
     kilo meter 4 ./ second 2
 
 
+time : Number Second
+time =
+    second 10
+
+
 energy : Number Joule
 energy =
     milli newton 10 .** meter 4
+
+
+{-| This doesn't work
+-}
+distance : Number (Mul (Div Meter Second) Second)
+distance =
+    speed .** time
